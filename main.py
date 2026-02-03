@@ -4,8 +4,9 @@ import time
 todos_local = []
 todos_list = []
 todos = functions.get_todos()
-
+print("The time is below:")
 print("Today is", time.strftime("%A, %B %d, %Y %H:%M:%S"))
+
 while True:
     user_action = input("Type add, show, edit, remove, exit: ")
     user_action = user_action.strip()
