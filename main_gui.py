@@ -10,7 +10,8 @@ remove_button = sg.Button("Remove")
 exit_button = sg.Button("Exit")
 
 
-layout = [[label], [input_box, add_button, edit_button, remove_button, exit_button]]
+layout = [[label], [input_box, add_button], [edit_button, remove_button, exit_button]]
+
 
 window = sg.Window('My To Do App', layout=layout)
 event, values = window.read()
