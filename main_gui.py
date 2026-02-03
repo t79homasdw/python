@@ -16,3 +16,4 @@ layout = [[label], [input_box, add_button], [edit_button, remove_button, exit_bu
 window = sg.Window('My To Do App', layout=layout)
 event, values = window.read()
 window.close()
+print("OK")
