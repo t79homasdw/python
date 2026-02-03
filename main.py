@@ -1,9 +1,14 @@
+#Modules
 # from functions import get_todos, write_todos
 from modules import functions
 import time
+
+#Variables
 todos_local = []
 todos_list = []
 todos = functions.get_todos()
+
+#Time
 print("The time is below:")
 print("Today is", time.strftime("%A, %B %d, %Y %H:%M:%S"))
 
