@@ -1,0 +1,4 @@
+"Station","City","Date","MaxTemp","MinTemp","Weather"
+"KUL","Kuala Lumpur","2023-07-01","30","20","Sunny"
+"KUL","Kuala Lumpur","2023-07-02","32","22","Rainy"
+"KUL","Kuala Lumpur","2023-07-03","28","18","Cloudy"
