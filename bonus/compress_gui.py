@@ -9,6 +9,8 @@ import io
 # Labels
 af_label = sg.Text("Select a file to compress")
 des_label = sg.Text("Enter destination folder")
+success_label = sg.Text(key="success", text_color="green", visible=False)
+fail_label = sg.Text(key="fail", text_color="red", visible=False)
 
 # Inputs Boxes
 af_input = sg.InputText(tooltip="Select a file", key="files")
@@ -22,7 +24,7 @@ exit_button = sg.Exit("Exit")
 
 layout = [[af_label, af_input, af_button],
           [des_label, des_input, des_button],
-          [cp_button, exit_button]]
+          [cp_button, exit_button, success_label, fail_label]]
 
 window = sg.Window('File Zipper', layout=layout)
 
@@ -38,4 +40,9 @@ while True:
         zip1 = os.path.basename(filenames[0])
         zip_filename = destination_folder + "/" + zip1[:-extension] + ".zip"
         zip_creator.compress_file(filenames, zip_filename)
+
+        window["success"].update("The file has been compressed successfully.", visible=True)
+        sg.popup("File compressed successfully.")
+        window["files"].update("")
+        window["folder"].update("")
 window.close()
