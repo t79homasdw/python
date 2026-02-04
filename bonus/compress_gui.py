@@ -43,5 +43,4 @@ while True:
         zip1 = os.path.basename(filenames[0])
         zip_filename = destination_folder + "/" + zip1[:-4] + ".zip"
         compress_file(filenames, zip_filename)
-
 window.close()
