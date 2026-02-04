@@ -4,44 +4,22 @@ import os
 import zipfile
 import io
 
-def test_compress_file():
-    source_file = "test.txt"
-    destination_folder = "test_folder"
-    compress_file()
-    assert os.path.exists(os.path.join(destination_folder, os.path.basename(source_file) + ".zip"))
-
-def compress_file():
-    source_file = af_input.get()
-    destination_folder = des_input.get()
-
-    if len(source_file) == 0 or len(destination_folder) == 0:
-        sg.popup("Please select a file and destination folder.")
-        return
-    elif len(source_file) == 1:
-        sg.popup("Please select a file.")
-        try:
-            with zipfile.ZipFile(os.path.join(destination_folder, os.path.basename(source_file) + ".zip"), "w") as zipf:
-                zipf.write(source_file, os.path.basename(source_file))
-        except FileNotFoundError:
-            sg.popup("File not found.")
-        return
-    elif len(source_file) > 1:
-        try:
-            for file in source_file:
-                with zipfile.ZipFile(os.path.join(destination_folder, os.path.basename(source_file[0]) + ".zip"), "w") as zipf:
-                    zipf.write(file, os.path.basename(file))
-        except FileNotFoundError:
-            sg.popup("File not found.")
-        return
-
+def compress_file(source_files, zip_filename):
+    try:
+        with zipfile.ZipFile(zip_filename, "w") as zipf:
+            for file in source_files:
+                zipf.write(file.strip("\n"), os.path.basename(file.strip("\n")))
+    except FileNotFoundError:
+        sg.popup("File not found.")
+    return
 
 # Labels
 af_label = sg.Text("Select a file to compress")
 des_label = sg.Text("Enter destination folder")
 
 # Inputs Boxes
-af_input = sg.InputText(tooltip="Select a file")
-des_input = sg.InputText(tooltip="Enter destination folder")
+af_input = sg.InputText(tooltip="Select a file", key="file")
+des_input = sg.InputText(tooltip="Enter destination folder", key="folder")
 
 # Buttons
 af_button = sg.FilesBrowse("Add File",tooltip="Select a file")
@@ -60,5 +38,10 @@ while True:
     if event == "Exit" or event == sg.WIN_CLOSED:
         break
     elif event == "Compress":
-        compress_file()
+        filenames = (values['file'].strip("\n")).split(";")
+        destination_folder = values['folder'].strip("\n")
+        zip1 = os.path.basename(filenames[0])
+        zip_filename = destination_folder + "/" + zip1[:-4] + ".zip"
+        compress_file(filenames, zip_filename)
+
 window.close()
