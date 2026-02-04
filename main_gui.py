@@ -14,7 +14,6 @@ edit_button = sg.Button("Edit")
 remove_button = sg.Button("Remove")
 exit_button = sg.Exit("Exit")
 
-
 layout = [
     [label],
     [input_box, add_button],
