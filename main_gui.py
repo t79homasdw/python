@@ -15,11 +15,11 @@ remove_button = sg.Button("Remove")
 exit_button = sg.Exit("Exit")
 
 
-layout = [[label],
-          [input_box, add_button],
-          [list_box, edit_button, remove_button, exit_button]]
-
-
+layout = [
+    [label],
+    [input_box, add_button],
+    [list_box, edit_button, remove_button, exit_button]
+]
 
 window = sg.Window('My To Do App',
                    layout=layout,
@@ -68,5 +68,6 @@ while True:
         case "todos":
             window['todo'].update(((values['todos'][0]).title()).strip("\n"))
         case "Exit" | sg.WIN_CLOSED:
-            exit()
+            break
+print("Goodbye!")
 window.close()
