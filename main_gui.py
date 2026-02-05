@@ -1,6 +1,14 @@
 from modules import functions
 import time
 import FreeSimpleGUI as sg
+import os
+
+if not os.path.exists("output"):
+    os.makedirs("output")
+
+if not os.path.exists("output/todos.txt"):
+    with open("output/todos.txt", "w") as file:
+        pass
 
 sg.theme("Black")
 
@@ -12,10 +20,11 @@ list_box = sg.Listbox(values=functions.get_todos(),
                      enable_events=True,
                      size=[45, 10])
 
-add_button = sg.Button("Add", size=[10, 1])
-edit_button = sg.Button("Edit", size=[10, 1])
-remove_button = sg.Button("Remove", size=[10, 1])
-exit_button = sg.Exit("Exit", size=[10, 1])
+# Buttons with images for Add and Remove
+add_button = sg.Button("Add",size=[10, 1], key="Add")
+edit_button = sg.Button("Edit",size=[10, 1], key="Edit")
+remove_button = sg.Button("Remove",size=[10, 1], key="Remove")
+exit_button = sg.Exit("Exit", size=[10, 1], key="Exit")
 
 left_column = sg.Column([
     [label],
@@ -39,6 +48,11 @@ window = sg.Window('My To Do App',
                    font=('Helvetica', 20))
 while True:
     event, values = window.read(timeout=200)
+
+    if event == sg.WIN_CLOSED or event == "Exit":
+        break
+
+    # 2. Update the clock only if the window is still open
     window["clock"].update(value=time.strftime("%b %d %Y %H:%M:%S"))
 
     # Reload current todos from file/function for each loop iteration
@@ -90,6 +104,5 @@ while True:
         case "todos":
             window['todo'].update(((values['todos'][0]).title()).strip("\n"))
         case "Exit" | sg.WIN_CLOSED:
-            exit()
             break
 window.close()
