@@ -1,3 +1,5 @@
+import streamlit as st
+
 #Variables
 dir_name = "output"
 file_name = "todos.txt"
@@ -7,6 +9,7 @@ if __name__ != "__main__":
     file_path = f"{dir_name}/{file_name}"
 else:
     file_path = f"../{dir_name}/{file_name}"
+
 
 # This function reads a text file and returns the list of to-do items.
 def get_todos(filepath_l = file_path):
